@@ -1,10 +1,26 @@
 version: "3.9"
 services:
     db:
-        image: "mcr.microsoft.com/mssql/server"
-        environment:
-
-            SA_PASSWORD: "Your_password123"
-            ACCEPT_EULA: "Y"
+        image: mysql
+        container_name: db
         ports:
-            - 1433:1433
+            - "3306:3036"
+        environment:
+            MYSQL_ROOT_PASSWORD: mesha
+            MYSQL_DATABASE: mesha
+            MYSQL_USER: mesha
+            MYSQL_PASSWORD: mesha
+        volumes:
+            - ./mysql:/mysql
+
+    minio:
+        image: minio/minio
+        ports:
+            - "9000:9000"
+            - "9001:9001"
+        environment:
+            MINIO_ROOT_USER: minioadmin
+            MINIO_ROOT_PASSWORD: minioadmin
+        volumes:
+            - "./minio/datalake:/data" 
+        command: server --console-address ":9001" /datalake
