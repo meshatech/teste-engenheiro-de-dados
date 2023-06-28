@@ -28,3 +28,15 @@ jupyterdev() {
     jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root
     
 }
+
+data() {
+
+    echo "Download dos dados"
+    mkdir dados
+    cd dados
+    mkdir row
+    cd row
+    wget https://download.inep.gov.br/microdados/microdados_enem_2020.zip
+    unzip dados/row/DADOS/MICRODADOS_ENEM_2020.csv
+
+}
